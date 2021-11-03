@@ -1,0 +1,20 @@
+body {
+  background-color: rgb(199, 195, 191);
+}
+
+header {
+  background-color: rgb(58, 45, 27);
+}
+
+.title {
+  font-size: 80px;
+  background-color: rgb(199, 195, 191);
+  margin-bottom: 30px;
+  margin-left: 50px;
+  color: rgb(58, 45, 27);
+}
+
+.navBtn {
+  background-color: rgb(199, 195, 191);
+  color: rgb(58, 45, 27);
+}
