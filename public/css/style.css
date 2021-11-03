@@ -21,3 +21,18 @@ header {
   margin-left: 55px;
   font-size: 20px;
 }
+
+#newPostPartial {
+  border: 3px solid rgb(58, 45, 27);
+}
+
+#newPostHeading {
+  color: rgb(199, 195, 191);
+  background-color: rgb(58, 45, 27);
+  padding: 3px;
+  font-size: 20px;
+}
+
+.textField {
+  max-width: 100%;
+}
