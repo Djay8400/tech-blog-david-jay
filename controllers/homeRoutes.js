@@ -16,8 +16,7 @@ router.get("/", async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const blogposts = blogData.map((data) => blogData.get({ plain: true }));
-
+    const blogposts = blogData.map((data) => data.get({ plain: true }));
     // Pass serialized data and session flag into template
     res.render("homepage", {
       blogposts,
@@ -30,7 +29,7 @@ router.get("/", async (req, res) => {
 
 router.get("/blogpost/:id", async (req, res) => {
   try {
-    const projectData = await Project.findByPk(req.params.id, {
+    const blogData = await Blogpost.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -39,10 +38,10 @@ router.get("/blogpost/:id", async (req, res) => {
       ],
     });
 
-    const project = projectData.get({ plain: true });
+    const techBlog = blogData.get({ plain: true });
 
     res.render("blogpost", {
-      ...project,
+      ...techBlog,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -62,6 +61,26 @@ router.get("/dashboard", withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     res.render("dashboard", {
+      ...user,
+      logged_in: true,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/dashboard/new", withAuth, async (req, res) => {
+  try {
+    // Find the logged in user based on the session ID
+
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Blogpost }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render("newpost", {
       ...user,
       logged_in: true,
     });
